@@ -3,6 +3,7 @@ import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config'
 import MainImage from '../LandingPage/Sections/MainImage'
 import MovieInfo from './Sections/MovieInfo'
 import GridCard from '../commons/GridCard'
+import Favorite from './Favorite'
 import { Row } from 'antd';
 
 function MovieDetail(props) {
@@ -14,7 +15,7 @@ function MovieDetail(props) {
 
     useEffect(() => {
 
-        console.log(props.match)
+        //console.log(props.match)
 
         //const endpoint = `${API_URL}movie/${movieId}/credits?api_key=${API_KEY}`;
 
@@ -24,14 +25,14 @@ function MovieDetail(props) {
         fetch(endpointInfo)
             .then(response => response.json())
             .then(response => {
-                console.log('movie', response)
+                //console.log('movie', response)
                 SetMovie(response)
             })
 
         fetch(endpointCrew)
             .then(response => response.json())
             .then(response => {
-                console.log('crew', response)
+                //console.log('crew', response)
                 SetCasts(response.cast)
             })
 
@@ -52,6 +53,12 @@ function MovieDetail(props) {
             />
 
             <div style={{ width: '85%', margin: '1rem auto' }}>
+                
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <Favorite   movieInfo={Movie} movieId={movieId} userFrom={localStorage.getItem('userId')}/>
+                </div>
+                
+                
                 <MovieInfo
                     movie={Movie}
                 />
